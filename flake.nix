@@ -44,7 +44,7 @@
             isNormalUser = true;
             extraGroups = [ "wheel" ]; # Enables sudo
             openssh.authorizedKeys.keys = [
-              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOHca54EkXUDDTTyQAPUMrPcj/ZktrEc6JTFBn6wHoOf" 
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOHca54EkXUDDTTyQAPUMrPcj/ZktrEc6JTFBn6wHoOf"
             ];
             # Packages only visible when logged into this account
             packages = with pkgs; [
@@ -52,7 +52,7 @@
             ];
           };
           users.users.root.openssh.authorizedKeys.keys = [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOHca54EkXUDDTTyQAPUMrPcj/ZktrEc6JTFBn6wHoOf" # <--- YOUR ACTUAL SSH KEY
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOHca54EkXUDDTTyQAPUMrPcj/ZktrEc6JTFBn6wHoOf"
           ];
 
           # 6. Maintenance & Performance
