@@ -42,6 +42,7 @@
           # 5. User Management
           users.users.fumovps = {
             isNormalUser = true;
+            linger = true;
             extraGroups = [ "wheel" ]; # Enables sudo
             openssh.authorizedKeys.keys = [
               "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOHca54EkXUDDTTyQAPUMrPcj/ZktrEc6JTFBn6wHoOf"
@@ -56,6 +57,22 @@
           ];
 
           # 6. Maintenance & Performance
+          services.cockpit = {
+            enable = true;
+            port = 9090;
+            openFirewall = false; # Automatically handles opening port 9090 in networking.firewall
+            
+            # Optional: Install the Podman integration plugin
+            plugins = with pkgs; [
+              cockpit-podman
+            ];
+            
+            settings = {
+              WebService = {
+                AllowUnencrypted = true; # Useful if you plan to reverse-proxy it through Caddy
+              };
+            };
+          };
           services.qemuGuest.enable = true;
           nix.settings.experimental-features = [ "nix-command" "flakes" ];
           nix.settings.auto-optimise-store = true;
@@ -67,6 +84,8 @@
           swapDevices = [ { device = "/var/lib/swapfile"; size = 2048; } ];
 
           environment.systemPackages = with pkgs; [
+            fastfetch
+
             # Core tools
             waypipe
             rclone
