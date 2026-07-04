@@ -28,3 +28,8 @@ NIX_SSHOPTS="-i ~/.ssh/key" nixos-rebuild switch \
   --flake .#vps \
   --target-host root@[IP_ADDRESS]
 ```
+
+## sshuttle
+```
+sshuttle -r [user]@[IP_ADDRESS] 0/0 --ssh-cmd 'ssh -i ~/.ssh/key' --python python3
+```
