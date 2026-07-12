@@ -2,7 +2,7 @@
 
 My NixOS config for my VPS
 
-## SSH with cockpit exposing
+## SSH with port exposing
 
 ```
 waypipe -c lz4  ssh -i ~/.ssh/key -L 9090:localhost:9090 [user]@[IP_ADDRESS]
