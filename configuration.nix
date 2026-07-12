@@ -44,22 +44,6 @@
   ];
 
   # 6. Maintenance & Performance
-  services.cockpit = {
-    enable = true;
-    port = 9090;
-    openFirewall = false; # Automatically handles opening port 9090 in networking.firewall
-    
-    # Optional: Install the Podman integration plugin
-    plugins = with pkgs; [
-      cockpit-podman
-    ];
-    
-    settings = {
-      WebService = {
-        AllowUnencrypted = true; # Useful if you plan to reverse-proxy it through Caddy
-      };
-    };
-  };
   services.qemuGuest.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.auto-optimise-store = true;
