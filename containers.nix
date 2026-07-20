@@ -14,5 +14,19 @@
   virtualisation.oci-containers.backend = "podman";
 
   # Define your containers
-  #virtualisation.oci-containers.containers = { };
+  virtualisation.oci-containers.containers = {
+    cockpit = {
+      image = "quay.io/cockpit/ws";
+      ports = [ "9090:9090" ];
+      extraOptions = [
+        "--privileged"
+        "--pid=host"
+      ];
+      volumes = [
+        "/:/host:rslave"
+      ];
+      cmd = [ "/container/atomic-run" "--local-ssh" ];
+      autoStart = true;
+    };
+  };
 }
