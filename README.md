@@ -26,7 +26,6 @@ sudo nix flake update
 ```
 NIX_SSHOPTS="-i ~/.ssh/key" nixos-rebuild switch \
   --flake .#vps \
-  --build-host root@[IP_ADDRESS] \
   --target-host root@[IP_ADDRESS]
 ```
 remove the build-host line if you want to build locally

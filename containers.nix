@@ -13,20 +13,22 @@
   # Enable Podman backend
   virtualisation.oci-containers.backend = "podman";
 
-  # Define your containers
-  virtualisation.oci-containers.containers = {
-    cockpit = {
-      image = "quay.io/cockpit/ws";
-      ports = [ "9090:9090" ];
-      extraOptions = [
-        "--privileged"
-        "--pid=host"
-      ];
-      volumes = [
-        "/:/host:rslave"
-      ];
-      cmd = [ "/container/atomic-run" "--local-ssh" ];
-      autoStart = true;
+  systemd.services.cockpit-container = {
+    description = "Cockpit Web Service Container";
+    after = [ "network-online.target" "podman.service" ];
+    requires = [ "network-online.target" "podman.service" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      Type = "simple";
+      ExecStartPre = "${pkgs.podman}/bin/podman pull quay.io/cockpit/ws";
+      ExecStart = "${pkgs.podman}/bin/podman run --rm --name cockpit-ws --privileged --pid=host -v /:/host:rslave -p 9090:9090 quay.io/cockpit/ws /container/atomic-run --local-ssh";
+      ExecStop = "${pkgs.podman}/bin/podman stop cockpit-ws";
+      Restart = "always";
+      RestartSec = 10;
     };
   };
+
+  # Define your containers
+  #virtualisation.oci-containers.containers = { };
 }
