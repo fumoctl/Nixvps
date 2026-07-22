@@ -30,7 +30,7 @@
   users.users.fumovps = {
     isNormalUser = true;
     linger = true;
-    extraGroups = [ "wheel" ]; # Enables sudo
+    extraGroups = [ "wheel" "docker" "podman" ]; # Enables sudo
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOHca54EkXUDDTTyQAPUMrPcj/ZktrEc6JTFBn6wHoOf"
     ];
