@@ -21,6 +21,13 @@
   # Enable Podman backend
   virtualisation.oci-containers.backend = "podman";
 
+  # Format: <backend>-<container_name>.service
+
   # Define your containers
-  #virtualisation.oci-containers.containers = { };
+  virtualisation.oci-containers.containers = {
+    podmanhello = {
+      image = "quay.io/podman/hello:latest";
+      autoStart = true;
+    };
+  };
 }
