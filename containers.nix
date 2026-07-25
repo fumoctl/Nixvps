@@ -11,7 +11,6 @@
   };
   environment.systemPackages = with pkgs; [
       podman-tui
-      podman-desktop
       podman-compose
       helm
       kubectl
@@ -25,9 +24,10 @@
 
   # Define your containers
   virtualisation.oci-containers.containers = {
-    podmanhello = {
-      image = "quay.io/podman/hello:latest";
+    my-service = {
+      image = "docker.io/nginx:alpine";
       autoStart = true;
+      podman.user = "fumovps";
     };
   };
 }

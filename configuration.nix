@@ -30,7 +30,8 @@
   users.users.fumovps = {
     isNormalUser = true;
     linger = true;
-    extraGroups = [ "wheel" "docker" "podman" ]; # Enables sudo
+    autoSubUidGidRange = true;
+    extraGroups = [ "wheel" "docker" "podman" "OCI" ]; # "wheel" Enables sudo
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOHca54EkXUDDTTyQAPUMrPcj/ZktrEc6JTFBn6wHoOf"
     ];
@@ -39,6 +40,8 @@
       
     ];
   };
+  users.groups.fumovps = {};
+
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOHca54EkXUDDTTyQAPUMrPcj/ZktrEc6JTFBn6wHoOf"
   ];
