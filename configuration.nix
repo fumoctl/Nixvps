@@ -81,8 +81,6 @@
 
   programs.zsh = {
     enable = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
     ohMyZsh = {
       enable = true;
       theme = "robbyrussell";
@@ -92,8 +90,14 @@
         "docker"
         "kubectl"
       ];
+      customPkgs = with pkgs; [
+        zsh-autosuggestions
+        zsh-syntax-highlighting
+      ];
     };
   };
+
+  
 
   nix.settings = {
     experimental-features = [
