@@ -10,7 +10,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
 
-  networking.hostName = "myvps";
+  networking.hostName = "nixvps";
   networking.useDHCP = lib.mkDefault true;
   networking.enableIPv6 = true;
   time.timeZone = "UTC";
