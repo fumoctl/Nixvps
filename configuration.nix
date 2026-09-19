@@ -10,7 +10,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
 
-  networking.hostName = "fumonix-vps";
+  networking.hostName = "myvps";
   networking.useDHCP = lib.mkDefault true;
   networking.enableIPv6 = true;
   time.timeZone = "UTC";
