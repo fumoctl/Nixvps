@@ -28,6 +28,9 @@ in
     enable = true;
   };
 
+  fonts.enableDefaultPackages = true;
+  programs.xwayland.enable = true;
+
   services.qemuGuest.enable = true;
 
   networking.firewall = {
@@ -67,6 +70,7 @@ in
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "prohibit-password";
+      StreamLocalBindUnlink = "yes";
     };
   };
 
@@ -131,6 +135,11 @@ in
     }
   ];
 
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+  };
+
   environment.systemPackages = with pkgs; [
     fastfetch
     htop
@@ -146,6 +155,7 @@ in
     python3
     waypipe
     cage
+    xwayland-satellite
     mullvad-browser
   ];
 
