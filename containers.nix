@@ -12,7 +12,8 @@
     };
     podman = {
       enable = true;
-    
+      autoPrune.enable = true;
+
       # CRITICAL: Do NOT enable dockerCompat or dockerSocket.enable
       dockerCompat = false;             # Leaves the `docker` CLI pointing to dockerd
       dockerSocket.enable = false;      # Leaves /var/run/docker.sock to Docker
@@ -37,10 +38,6 @@
     # --- Image Inspection & Registries ---
     skopeo              # Inspect, copy, and sign container images without pulling/running them
     dive                # Inspect layer-by-layer contents and sizes of container images
-
-    # --- Rootless / CNI Utilities ---
-    shadow              # Provides subuid/subgid helpers (newuidmap, newgidmap)
-    fuse-overlayfs      # Fallback userspace storage driver for unprivileged containers
   ];
 
   virtualisation.oci-containers = {

@@ -5,6 +5,11 @@
 , ...
 }:
 
+let
+  sshKeys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOHca54EkXUDDTTyQAPUMrPcj/ZktrEc6JTFBn6wHoOf"
+  ];
+in
 {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
@@ -54,9 +59,7 @@
     "fs.inotify.max_user_instances" = 8192;
   };
 
-  systemd.user.extraConfig = ''
-    DefaultDelegate=yes
-  '';
+  systemd.services."user@".serviceConfig.Delegate = "cpu cpuset io memory pids";
 
   services.openssh = {
     enable = true;
@@ -77,20 +80,18 @@
       "podman"
       "docker"
     ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOHca54EkXUDDTTyQAPUMrPcj/ZktrEc6JTFBn6wHoOf"
-    ];
+    openssh.authorizedKeys.keys = sshKeys;
     packages = with pkgs; [ ];
   };
 
   users.groups.fumovps = { };
 
-  users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOHca54EkXUDDTTyQAPUMrPcj/ZktrEc6JTFBn6wHoOf"
-  ];
+  users.users.root.openssh.authorizedKeys.keys = sshKeys;
 
   programs.zsh = {
     enable = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
     ohMyZsh = {
       enable = true;
       theme = "robbyrussell";
@@ -99,10 +100,6 @@
         "sudo"
         "docker"
         "kubectl"
-      ];
-      customPkgs = with pkgs; [
-        zsh-autosuggestions
-        zsh-syntax-highlighting
       ];
     };
   };
@@ -156,7 +153,7 @@
     enable = true;
     libraries = with pkgs; [ ];
   };
-
+  
   documentation.man.cache.enable = true;
 
   system.stateVersion = "26.05";

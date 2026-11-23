@@ -20,7 +20,7 @@ nix run github:nix-community/nixos-anywhere -- \
 ## Update
 
 ```
-sudo nix flake update
+nix flake update
 ```
 
 ```
@@ -28,7 +28,6 @@ NIX_SSHOPTS="-i ~/.ssh/key" nixos-rebuild switch \
   --flake .#vps \
   --target-host root@[IP_ADDRESS]
 ```
-remove the build-host line if you want to build locally
 
 if you want to build remotely you can also use:
 ```
