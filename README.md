@@ -1,6 +1,6 @@
 # Nixvps
 
-My NixOS config for my VPS
+My NixOS config for my Contabo VPS
 
 ## SSH with port exposing
 

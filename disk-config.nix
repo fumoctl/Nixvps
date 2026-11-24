@@ -13,6 +13,7 @@
 
         partitions = {
           boot = {
+            priority = 1;
             size = "1M";
             type = "EF02";
           };

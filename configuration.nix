@@ -16,8 +16,20 @@ in
   ];
 
   networking.hostName = "nixvps";
-  networking.useDHCP = lib.mkDefault true;
+  networking.useDHCP = false;
+  networking.useNetworkd = true;
   networking.enableIPv6 = true;
+
+  services.cloud-init = {
+    enable = true;
+    network.enable = true;
+    settings = {
+      preserve_hostname = true;
+      cloud_init_modules = [ ];
+      cloud_config_modules = [ ];
+      cloud_final_modules = [ ];
+    };
+  };
   time.timeZone = "UTC";
 
   boot.kernelModules = [ "tun" "wireguard" ];
@@ -94,6 +106,7 @@ in
 
   programs.zsh = {
     enable = true;
+    interactiveShellInit = "zsh-newuser-install() { :; }";
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
     ohMyZsh = {
